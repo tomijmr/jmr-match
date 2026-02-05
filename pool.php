@@ -46,9 +46,13 @@ $persona = $res->fetch_assoc();
 <body>
 
 <div class="container">
-    <nav class="navbar navbar-light bg-light mb-3">
-        <div class="container-fluid justify-content-center">
-            <span class="navbar-brand mb-0 h1 text-danger">❤️ jmr Night</span>
+    <nav class="navbar navbar-light bg-light mb-3 shadow-sm rounded">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <a href="logout.php" class="text-secondary fs-4"><i class="bi bi-box-arrow-left"></i></a>
+            <span class="navbar-brand mb-0 h1 text-danger fw-bold">❤️ jmr Night</span>
+            <a href="matchs.php" class="text-danger fs-3 position-relative">
+                <i class="bi bi-chat-heart-fill"></i>
+            </a>
         </div>
     </nav>
 
