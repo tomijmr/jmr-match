@@ -48,7 +48,7 @@ $persona = $res->fetch_assoc();
 <div class="container">
     <nav class="navbar navbar-light bg-light mb-3">
         <div class="container-fluid justify-content-center">
-            <span class="navbar-brand mb-0 h1 text-danger">❤️ Cupido Night</span>
+            <span class="navbar-brand mb-0 h1 text-danger">❤️ jmr Night</span>
         </div>
     </nav>
 
