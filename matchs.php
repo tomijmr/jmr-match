@@ -46,11 +46,6 @@ $res = $conn->query($sql);
     <?php if ($res->num_rows > 0): ?>
         <div class="row">
             <?php while($match = $res->fetch_assoc()): ?>
-                <?php 
-                    $mensaje = "Hola hicimos match en " . $match['nombre_local']; 
-                    $link_whatsapp = "https://wa.me/" . $match['whatsapp'] . "?text=" . urlencode($mensaje);
-                    $link_instagram = "https://instagram.com/" . $match['instagram'];
-                ?>
                 <div class="col-md-6 col-lg-4">
                     <div class="match-card">
                         <img src="uploads/<?php echo $match['foto1']; ?>" class="match-img" alt="Foto">
@@ -59,8 +54,9 @@ $res = $conn->query($sql);
                             <small class="text-muted"><i class="bi bi-geo-alt-fill"></i> <?php echo $match['nombre_local']; ?></small>
                         </div>
                         <div>
-                            <a href="<?php echo $link_whatsapp; ?>" target="_blank" class="btn-whatsapp"><i class="bi bi-whatsapp"></i></a>
-                            <a href="<?php echo $link_instagram; ?>" target="_blank" class="btn-instagram"><i class="bi bi-instagram"></i></a>
+                            <a href="chat.php?usuario_id=<?php echo $match['id']; ?>" class="btn btn-danger rounded-pill px-4">
+                                <i class="bi bi-chat-dots-fill me-1"></i> Chatear
+                            </a>
                         </div>
                     </div>
                 </div>
