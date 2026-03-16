@@ -1,5 +1,5 @@
 // Sistema de notificaciones JMR Match
-let lastCheck = new Date().toISOString().slice(0, 19).replace('T', ' ');
+let lastCheck = null; // Iniciar en null para que el servidor decida la hora inicial
 let notificationPermissionRequested = false;
 let audioContext = null;
 
@@ -72,8 +72,11 @@ function startNotifications() {
 }
 
 function showNotification(title, body, icon) {
-    // 0. Reproducir sonido
+    // 0. Reproducir sonido y vibrar
     playNotificationSound();
+    if ("vibrate" in navigator) {
+        navigator.vibrate([200, 100, 200]);
+    }
 
     // 1. Intentar notificación del sistema
     if ("Notification" in window && Notification.permission === "granted") {
@@ -110,8 +113,13 @@ function showNotification(title, body, icon) {
 
 function pollNotifications() {
     setInterval(() => {
-        // Enviar lastCheck codificado
-        fetch(`check_notifications.php?last_check=${encodeURIComponent(lastCheck)}`)
+        // Enviar lastCheck solo si lo tenemos, sino el servidor usa su hora actual
+        let url = 'check_notifications.php';
+        if (lastCheck) {
+            url += `?last_check=${encodeURIComponent(lastCheck)}`;
+        }
+
+        fetch(url)
             .then(response => response.json())
             .then(data => {
                 // Actualizar hora del ultimo check con la del servidor

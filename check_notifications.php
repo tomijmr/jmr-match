@@ -11,7 +11,7 @@ if (!isset($_SESSION['usuario_id'])) {
 
 $my_id = $_SESSION['usuario_id'];
 // Timestamp from client or default to 5 seconds ago
-$last_check = isset($_GET['last_check']) ? $_GET['last_check'] : date('Y-m-d H:i:s', time() - 10); 
+$last_check = isset($_GET['last_check']) ? $_GET['last_check'] : date('Y-m-d H:i:s', time() - 300); // 5 min para el primer check
 
 $response = [
     'matches' => [],
