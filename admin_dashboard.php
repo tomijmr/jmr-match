@@ -39,7 +39,7 @@ $total_matches = $conn->query("SELECT count(*) as total FROM likes l1 JOIN likes
     <div class="container py-5">
         <div class="row mb-4 align-items-center">
             <div class="col-md-8 d-flex align-items-center gap-3">
-                <img src="img/logo2.png" style="width: 80px; height: auto;">
+                <img src="img/logo.png" style="width: 80px; height: auto;">
                 <div>
                     <h1 class="mb-0">Panel de <?php echo $local['nombre']; ?></h1>
                     <p class="lead mb-0 text-muted">Gestiona tu evento</p>
