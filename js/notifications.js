@@ -1,28 +1,80 @@
 // Sistema de notificaciones JMR Match
 let lastCheck = new Date().toISOString().slice(0, 19).replace('T', ' ');
 let notificationPermissionRequested = false;
+let audioContext = null;
 
-// Intentar pedir permisos en la primera interacción del usuario (click o touch)
-document.addEventListener('click', requestNotificationPermission, { once: true });
-document.addEventListener('touchstart', requestNotificationPermission, { once: true });
+// Intentar pedir permisos y habilitar audio en la primera interacción
+document.addEventListener('click', enableNotificationsAndAudio, { once: true });
+document.addEventListener('touchstart', enableNotificationsAndAudio, { once: true });
 
-function requestNotificationPermission() {
+function enableNotificationsAndAudio() {
     if (notificationPermissionRequested) return;
     notificationPermissionRequested = true;
 
+    // 1. Pedir permiso de Notificaciones
     if ("Notification" in window && Notification.permission !== "granted" && Notification.permission !== "denied") {
         Notification.requestPermission().then(permission => {
             console.log("Permiso de notificaciones:", permission);
         });
     }
+
+    // 2. Inicializar AudioContext (necesario para Safari/Chrome mobile)
+    try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) {
+            audioContext = new AudioContext();
+            // Reproducir un sonido silencioso para desbloquear el audio
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            gainNode.gain.value = 0; // Silencio
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            oscillator.start(0);
+            oscillator.stop(0.001);
+        }
+    } catch (e) {
+        console.error("Error inicializando audio:", e);
+    }
+}
+
+function playNotificationSound() {
+    if (!audioContext) return;
+    
+    // Si el contexto está suspendido (común en mobile), intentar reanudarlo
+    if (audioContext.state === 'suspended') {
+        audioContext.resume();
+    }
+
+    try {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(880, audioContext.currentTime); // A5
+        oscillator.frequency.exponentialRampToValueAtTime(440, audioContext.currentTime + 0.5); // Baja a A4
+        
+        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5);
+
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.5);
+    } catch (e) {
+        console.error("Error reproduciendo sonido:", e);
+    }
 }
 
 function startNotifications() {
-    // Iniciar polling independientemente del permiso, para mostrar Toasts
+    // Iniciar polling independientemente del permiso
     pollNotifications();
 }
 
 function showNotification(title, body, icon) {
+    // 0. Reproducir sonido
+    playNotificationSound();
+
     // 1. Intentar notificación del sistema
     if ("Notification" in window && Notification.permission === "granted") {
         try {
@@ -54,6 +106,7 @@ function showNotification(title, body, icon) {
         }).showToast();
     }
 }
+
 
 function pollNotifications() {
     setInterval(() => {
