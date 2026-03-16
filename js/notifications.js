@@ -18,22 +18,29 @@ function enableNotificationsAndAudio() {
         });
     }
 
-    // 2. Inicializar AudioContext (necesario para Safari/Chrome mobile)
+    // 2. Inicializar AudioContext
     try {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         if (AudioContext) {
             audioContext = new AudioContext();
-            // Reproducir un sonido silencioso para desbloquear el audio
             const oscillator = audioContext.createOscillator();
             const gainNode = audioContext.createGain();
-            gainNode.gain.value = 0; // Silencio
+            gainNode.gain.value = 0; 
             oscillator.connect(gainNode);
             gainNode.connect(audioContext.destination);
             oscillator.start(0);
             oscillator.stop(0.001);
         }
-    } catch (e) {
-        console.error("Error inicializando audio:", e);
+    } catch (e) { console.error(e); }
+
+    // 3. Registrar Service Worker para notificaciones móviles (Si aplica)
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js')
+        .then(function(reg) {
+            console.log('Service Worker registrado', reg);
+        }).catch(function(err) {
+            console.log('Error al registrar SW', err);
+        });
     }
 }
 
@@ -78,16 +85,25 @@ function showNotification(title, body, icon) {
         navigator.vibrate([200, 100, 200]);
     }
 
-    // 1. Intentar notificación del sistema
+    // 1. Intentar notificación del sistema (Preferiblemente via Service Worker en Android)
     if ("Notification" in window && Notification.permission === "granted") {
-        try {
-            new Notification(title, {
-                body: body,
-                icon: icon,
-                vibrate: [200, 100, 200]
+        if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+            navigator.serviceWorker.ready.then(function(registration) {
+                registration.showNotification(title, {
+                    body: body,
+                    icon: icon,
+                    vibrate: [200, 100, 200],
+                    tag: 'match-notification'
+                });
             });
-        } catch (e) {
-            console.error("Error mostrando notificación nativa:", e);
+        } else {
+            try {
+                new Notification(title, {
+                    body: body,
+                    icon: icon,
+                    vibrate: [200, 100, 200]
+                });
+            } catch (e) { console.error(e); }
         }
     }
 
