@@ -33,6 +33,7 @@ $otro_usuario = $res->fetch_assoc();
     <title>Chat con <?php echo $otro_usuario['nombre']; ?> - JMR Night</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <style>
         /* Fix para móviles: usar dvh si es compatible, fallback a vh */
         body { background-color: #121212; height: 100vh; height: 100dvh; display: flex; flex-direction: column; overflow: hidden; color: white; }
@@ -75,6 +76,7 @@ $otro_usuario = $res->fetch_assoc();
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script src="js/notifications.js"></script>
 <script>
     const miId = <?php echo $mi_id; ?>;

@@ -26,6 +26,7 @@ $res = $conn->query($sql);
     <title>Mis Matches - JMR Night</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <style>
         body { background-color: #121212; color: #e0e0e0; }
         .match-card { background: #1E1E1E; border: 1px solid #333; border-radius: 15px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.5); display: flex; align-items: center; color: white; }
@@ -82,5 +83,6 @@ $res = $conn->query($sql);
 </div>
 
 </body>
-<script src="js/notifications.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="js/notifications.js"></script>
 </html>
