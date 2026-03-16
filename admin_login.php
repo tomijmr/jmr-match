@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="col-md-4">
                 <div class="card shadow p-4">
                     <div class="text-center mb-4">
-                        <img src="img/logo.png" style="width: 120px; height: auto;">
+                        <img src="img/logo3.png" style="width: 120px; height: auto;">
                         <h3 class="mt-2">Panel Boliche</h3>
                     </div>
                     

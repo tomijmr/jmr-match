@@ -45,7 +45,7 @@ $res = $conn->query($sql);
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div class="d-flex align-items-center gap-2">
-            <img src="img/logo.png" style="height: 50px; width: auto;">
+            <img src="img/logo3.png" style="height: 50px; width: auto;">
             <h2 class="fw-bold text-danger mb-0">Matches 🔥</h2>
         </div>
         <a href="pool.php" class="btn btn-outline-danger btn-sm"><i class="bi bi-arrow-left"></i> Volver</a>
