@@ -1,6 +1,51 @@
 <?php 
 include('db.php');
 
+// Función para comprimir y redimensionar imágenes
+function compressImage($source, $destination, $quality) {
+    $imgInfo = getimagesize($source);
+    $mime = $imgInfo['mime'];
+
+    switch($mime){
+        case 'image/jpeg': $image = imagecreatefromjpeg($source); break;
+        case 'image/png':  $image = imagecreatefrompng($source); break;
+        case 'image/gif':  $image = imagecreatefromgif($source); break;
+        case 'image/webp': $image = imagecreatefromwebp($source); break;
+        default: return false;
+    }
+
+    // Fix rotación automática de celulares (EXIF)
+    if ($mime == 'image/jpeg' && function_exists('exif_read_data')) {
+        $exif = @exif_read_data($source);
+        if (!empty($exif['Orientation'])) {
+            switch ($exif['Orientation']) {
+                case 3: $image = imagerotate($image, 180, 0); break;
+                case 6: $image = imagerotate($image, -90, 0); break;
+                case 8: $image = imagerotate($image, 90, 0); break;
+            }
+        }
+    }
+
+    // Redimensionar a max 800px de ancho
+    $maxWidth = 800;
+    $width = imagesx($image);
+    $height = imagesy($image);
+
+    if ($width > $maxWidth) {
+        $newWidth = $maxWidth;
+        $newHeight = floor($height * ($maxWidth / $width));
+        $tmp = imagecreatetruecolor($newWidth, $newHeight);
+        imagecopyresampled($tmp, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        imagedestroy($image);
+        $image = $tmp;
+    }
+
+    // Guardar siempre como JPG comprimido
+    imagejpeg($image, $destination, $quality);
+    imagedestroy($image);
+    return true;
+}
+
 // Hardcodeamos el acceso a Zeppelin
 $codigo_default = 'ZEPPELIN'; 
 $res = $conn->query("SELECT id, nombre FROM locales WHERE codigo_acceso = '$codigo_default'");
@@ -21,12 +66,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         mkdir('uploads', 0777, true);
     }
 
-    $filename = $_FILES['foto']['name'];
-    $ext = pathinfo($filename, PATHINFO_EXTENSION);
-    $foto_nombre = time() . "_" . uniqid() . "." . $ext;
+    $foto_nombre = time() . "_" . uniqid() . ".jpg"; // Guardamos siempre como JPG comprimido
     $ruta_destino = "uploads/" . $foto_nombre;
 
-    if (move_uploaded_file($_FILES['foto']['tmp_name'], $ruta_destino)) {
+    // Usamos la función de compresión (Calidad 60 para web rápida)
+    if (compressImage($_FILES['foto']['tmp_name'], $ruta_destino, 60)) {
         // Insertamos NULL en instagram y whatsapp
         $sql = "INSERT INTO usuarios (local_id, nombre, edad, instagram, whatsapp, foto1, sexo, interes) 
                 VALUES ('$local_id', '$nombre', $edad, NULL, NULL, '$foto_nombre', '$sexo', '$interes')";
@@ -40,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "Error DB: " . $conn->error;
         }
     } else {
-        echo "Error subiendo foto.";
+        echo "Error procesando la imagen. Asegúrate de subir JPG, PNG o WEBP.";
     }
 }
 ?>
