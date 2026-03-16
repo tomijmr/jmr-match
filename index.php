@@ -111,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <div class="container py-5">
         <div class="text-center mb-4">
-            <img src="img/logo3.png" alt="Zepellin Bar" style="width: 150px; height: auto; margin-bottom: 2rem;">
+            <img src="img/logo4.png" alt="Zepellin Bar" style="width: 150px; height: auto; margin-bottom: 2rem;">
             <p class="lead text-muted">¡Creá tu perfil y conocé gente ahora!</p>
         </div>
 

@@ -61,7 +61,7 @@ $persona = $res->fetch_assoc();
         <div class="container-fluid d-flex justify-content-between align-items-center">
             <a href="logout.php" class="text-secondary fs-4"><i class="bi bi-box-arrow-left"></i></a>
             <span class="navbar-brand mb-0 h1 text-danger fw-bold">
-                <img src="img/logo3.png" alt="Zepellin" style="height: 40px; width: auto;">
+                <img src="img/logo4.png" alt="Zepellin" style="height: 40px; width: auto;">
             </span>
             <a href="matchs.php" class="text-danger fs-3 position-relative">
                 <i class="bi bi-chat-heart-fill"></i>
