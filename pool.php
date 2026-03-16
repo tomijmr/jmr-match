@@ -95,4 +95,5 @@ $persona = $res->fetch_assoc();
 </div>
 
 </body>
+<script src="js/notifications.js"></script>
 </html>

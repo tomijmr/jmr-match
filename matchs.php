@@ -82,4 +82,5 @@ $res = $conn->query($sql);
 </div>
 
 </body>
+<script src="js/notifications.js"></script>
 </html>

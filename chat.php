@@ -75,6 +75,7 @@ $otro_usuario = $res->fetch_assoc();
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/notifications.js"></script>
 <script>
     const miId = <?php echo $mi_id; ?>;
     const otroId = <?php echo $otro_id; ?>;
