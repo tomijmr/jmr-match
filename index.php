@@ -2,22 +2,20 @@
 include('db.php');
 
 // Hardcodeamos el acceso a Zeppelin
-$codigo_default = 'ZEPPELIN'; // Este debe existir en la BD
+$codigo_default = 'ZEPPELIN'; 
 $res = $conn->query("SELECT id, nombre FROM locales WHERE codigo_acceso = '$codigo_default'");
 $local = $res->fetch_assoc();
 
 if (!$local) {
-    // Si no existe Zeppelin, fallback a ID 1 o error
     die("Error de configuración: Local Zeppelin no encontrado.");
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nombre = $_POST['nombre'];
-    $ig = $_POST['instagram'];
-    $wa = $_POST['whatsapp'];
+    $edad = intval($_POST['edad']);
     $sexo = $_POST['sexo'];
-    $interes = $_POST['interes'];
-    $local_id = $local['id']; // Usamos el ID del local hardcodeado
+    $interes = 'todos'; // Default
+    $local_id = $local['id']; 
 
     if (!is_dir('uploads')) {
         mkdir('uploads', 0777, true);
@@ -29,8 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $ruta_destino = "uploads/" . $foto_nombre;
 
     if (move_uploaded_file($_FILES['foto']['tmp_name'], $ruta_destino)) {
-        $sql = "INSERT INTO usuarios (local_id, nombre, instagram, whatsapp, foto1, sexo, interes) 
-                VALUES ('$local_id', '$nombre', '$ig', '$wa', '$foto_nombre', '$sexo', '$interes')";
+        // Insertamos NULL en instagram y whatsapp
+        $sql = "INSERT INTO usuarios (local_id, nombre, edad, instagram, whatsapp, foto1, sexo, interes) 
+                VALUES ('$local_id', '$nombre', $edad, NULL, NULL, '$foto_nombre', '$sexo', '$interes')";
         
         if ($conn->query($sql)) {
             $_SESSION['usuario_id'] = $conn->insert_id;
@@ -60,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         .form-control:focus, .form-select:focus { background-color: #2C2C2C; border-color: #FF751F; color: white; box-shadow: 0 0 0 0.25rem rgba(255, 117, 31, 0.25); }
         .btn-danger { background-color: #FF751F; border-color: #FF751F; color: white; font-weight: bold; }
         .btn-danger:hover { background-color: #e06010; border-color: #e06010; }
-        h1, h2 { color: #FF751F; }
+        h1, h2, label { color: #FF751F; }
         .text-muted { color: #aaa !important; }
     </style>
 </head>
@@ -81,36 +80,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Instagram (sin @):</label>
-                        <input type="text" name="instagram" class="form-control" placeholder="sofia_g" required>
+                        <label class="form-label">Tu Edad:</label>
+                        <input type="number" name="edad" class="form-control" placeholder="Ej: 25" min="18" required>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">WhatsApp:</label>
-                        <input type="tel" name="whatsapp" class="form-control" placeholder="387..." required>
+                        <label class="form-label">Sos:</label>
+                        <select name="sexo" class="form-select">
+                            <option value="Hombre">Hombre</option>
+                            <option value="Mujer">Mujer</option>
+                            <option value="Trans">Trans</option>
+                            <option value="Cross">Cross</option>
+                            <option value="Pareja Hetero">Pareja Hetero</option>
+                            <option value="Pareja Hombres">Pareja Hombres</option>
+                            <option value="Pareja Mujeres">Pareja Mujeres</option>
+                            <option value="Pareja Swinger">Pareja Swinger</option>
+                        </select>
                     </div>
-
-                    <div class="row mb-3">
-                        <div class="col-6">
-                            <label class="form-label">Sos:</label>
-                            <select name="sexo" class="form-select">
-                                <option value="hombre">Hombre</option>
-                                <option value="mujer">Mujer</option>
-                            </select>
-                        </div>
-                        <div class="col-6">
-                            <label class="form-label">Buscás:</label>
-                            <select name="interes" class="form-select">
-                                <option value="mujer">Mujeres</option>
-                                <option value="hombre">Hombres</option>
-                                <option value="todos">Ambos</option>
-                            </select>
-                        </div>
-                    </div>
-
+                    
                     <div class="mb-4">
-                        <label class="form-label">Tu mejor foto:</label>
-                        <input type="file" name="foto" class="form-control" accept="image/*" required>
+                        <label class="form-label">Tu Foto (Selfie al instante):</label>
+                        <input type="file" name="foto" class="form-control" accept="image/*" capture="user" required>
                     </div>
 
                     <button type="submit" class="btn btn-danger w-100 py-3 fs-5">¡ENTRAR AL MUNDO MATCH!</button>

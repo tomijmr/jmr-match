@@ -73,8 +73,8 @@ $persona = $res->fetch_assoc();
     <div class="tinder-card">
         <img src="uploads/<?php echo $persona['foto1']; ?>" class="profile-img">
         <div class="info">
-            <h3><?php echo $persona['nombre']; ?></h3>
-            <p class="text-muted"><i class="bi bi-instagram"></i> @<?php echo $persona['instagram']; ?></p>
+            <h3><?php echo $persona['nombre']; ?>, <?php echo $persona['edad']; ?></h3>
+            <p class="text-muted"><i class="bi bi-person-fill"></i> <?php echo $persona['sexo']; ?></p>
         </div>
         <div class="actions">
             <a href="pool.php" class="btn-circle btn-dislike"><i class="bi bi-x-lg"></i></a>
