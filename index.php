@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         .card { background-color: #1E1E1E; border: 1px solid #333; color: white; }
         .form-control, .form-select { background-color: #2C2C2C; border: 1px solid #444; color: white; }
         .form-control:focus, .form-select:focus { background-color: #2C2C2C; border-color: #FF751F; color: white; box-shadow: 0 0 0 0.25rem rgba(255, 117, 31, 0.25); }
-        .form-control::placeholder { color: rgba(255, 255, 255, 0.7) !important; opacity: 1; }
+        .form-control::placeholder { color: rgb(164, 164, 164) !important; opacity: 1; }
         .btn-danger { background-color: #FF751F; border-color: #FF751F; color: white; font-weight: bold; }
         .btn-danger:hover { background-color: #e06010; border-color: #e06010; }
         h1, h2, label { color: #FF751F; }
