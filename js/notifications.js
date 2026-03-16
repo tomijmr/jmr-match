@@ -87,14 +87,26 @@ function showNotification(title, body, icon) {
 
     // 1. Intentar notificación del sistema (Preferiblemente via Service Worker en Android)
     if ("Notification" in window && Notification.permission === "granted") {
-        if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+        if ('serviceWorker' in navigator) {
+            // Intentar usar el Service Worker si está registrado, incluso si no controla (aún) la página
             navigator.serviceWorker.ready.then(function(registration) {
                 registration.showNotification(title, {
                     body: body,
                     icon: icon,
                     vibrate: [200, 100, 200],
-                    tag: 'match-notification'
+                    tag: 'match-notification',
+                    renotify: true
                 });
+            }).catch(function(e) {
+                // Fallback si falla el SW
+                console.error("Fallo notification SW:", e);
+                try {
+                    new Notification(title, {
+                        body: body,
+                        icon: icon,
+                        vibrate: [200, 100, 200]
+                    });
+                } catch (e2) { console.error(e2); }
             });
         } else {
             try {
