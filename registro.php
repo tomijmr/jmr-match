@@ -58,8 +58,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro | <?php echo $local['nombre']; ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #121212 !important; color: white; }
+        .card { background-color: #1E1E1E; border: 1px solid #333; color: white; }
+        .form-control, .form-select { background-color: #2C2C2C; border: 1px solid #444; color: white; }
+        .form-control:focus, .form-select:focus { background-color: #2C2C2C; border-color: #FF751F; color: white; box-shadow: 0 0 0 0.25rem rgba(255, 117, 31, 0.25); }
+        .btn-danger { background-color: #FF751F; border-color: #FF751F; color: white; }
+        .btn-danger:hover { background-color: #e06010; border-color: #e06010; }
+        h2 { color: #FF751F; }
+    </style>
 </head>
-<body class="bg-light">
+<body class="">
     <div class="container py-4">
         <h2 class="text-center">Crear Perfil en <?php echo $local['nombre']; ?></h2>
         <form action="registro.php?codigo=<?php echo $codigo; ?>" method="POST" enctype="multipart/form-data" class="card p-4 shadow-sm">

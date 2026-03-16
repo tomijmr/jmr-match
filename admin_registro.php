@@ -18,8 +18,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8"><title>Registro Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #121212 !important; color: white !important; }
+        .card { background-color: #1E1E1E !important; border: 1px solid #333; color: white !important; }
+        .form-control { background-color: #2C2C2C; border: 1px solid #444; color: white; }
+        .form-control:focus { background-color: #2C2C2C; color: white; border-color: #FF751F; box-shadow: 0 0 0 0.25rem rgba(255, 117, 31, 0.25); }
+        .btn-primary { background-color: #FF751F; border-color: #FF751F; color: white; }
+        .btn-primary:hover { background-color: #e06010; border-color: #e06010; }
+        .text-dark { color: white !important; }
+    </style>
 </head>
-<body class="bg-dark text-white">
+<body class="">
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-4 card p-4 text-dark">

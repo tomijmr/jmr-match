@@ -33,23 +33,36 @@ $persona = $res->fetch_assoc();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <style>
-        body { background-color: #f8f9fa; }
-        .tinder-card { border-radius: 20px; overflow: hidden; max-width: 400px; margin: 20px auto; background: white; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        body { background-color: #121212; color: #e0e0e0; }
+        .tinder-card { border-radius: 20px; overflow: hidden; max-width: 400px; margin: 20px auto; background: #1E1E1E; box-shadow: 0 10px 20px rgba(0,0,0,0.5); border: 1px solid #333; }
         .profile-img { width: 100%; height: 450px; object-fit: cover; }
-        .info { padding: 20px; }
+        .info { padding: 20px; color: white; }
+        .info h3 { color: white; }
+        .text-muted { color: #adb5bd !important; }
         .actions { display: flex; justify-content: space-around; padding-bottom: 20px; }
         .btn-circle { width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; border: none; transition: 0.3s; }
-        .btn-like { background: #ff4b2b; color: white; }
-        .btn-dislike { background: #eee; color: #555; }
+        .btn-like { background: #FF751F; color: white; }
+        .btn-like:hover { background: #e06010; }
+        .btn-dislike { background: #333; color: #fff; }
+        .btn-dislike:hover { background: #444; }
+        
+        /* Navbar Dark Mode Override */
+        .navbar { background-color: #1E1E1E !important; border-bottom: 1px solid #333; }
+        .navbar-brand { color: #FF751F !important; }
+        .bi-box-arrow-left { color: #ccc; }
+        .bi-chat-heart-fill { color: #FF751F; }
+        .btn-danger { background-color: #FF751F; border-color: #FF751F; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <nav class="navbar navbar-light bg-light mb-3 shadow-sm rounded">
+    <nav class="navbar navbar-light bg-light mb-3 shadow-sm rounded p-3">
         <div class="container-fluid d-flex justify-content-between align-items-center">
             <a href="logout.php" class="text-secondary fs-4"><i class="bi bi-box-arrow-left"></i></a>
-            <span class="navbar-brand mb-0 h1 text-danger fw-bold">❤️ jmr Night</span>
+            <span class="navbar-brand mb-0 h1 text-danger fw-bold">
+                <img src="img/logo2.png" alt="Zepellin" style="height: 40px; width: auto;">
+            </span>
             <a href="matchs.php" class="text-danger fs-3 position-relative">
                 <i class="bi bi-chat-heart-fill"></i>
             </a>

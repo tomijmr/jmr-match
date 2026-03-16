@@ -23,13 +23,27 @@ $total_matches = $conn->query("SELECT count(*) as total FROM likes l1 JOIN likes
     <meta charset="UTF-8">
     <title>Panel de Control | <?php echo $local['nombre']; ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #121212 !important; color: white !important; }
+        .card { background-color: #1E1E1E; border: 1px solid #333; color: white; }
+        h1, h2, h3, h4 { color: white; }
+        .text-primary { color: #FF751F !important; }
+        .border-primary { border-color: #FF751F !important; }
+        .btn-outline-danger { color: #FF751F; border-color: #FF751F; }
+        .btn-outline-danger:hover { background-color: #FF751F; color: white; }
+        .badge.bg-danger { background-color: #FF751F !important; }
+        code { color: #FF751F; }
+    </style>
 </head>
-<body class="bg-light">
+<body class="">
     <div class="container py-5">
-        <div class="row mb-4">
-            <div class="col-md-8">
-                <h1>Panel de <?php echo $local['nombre']; ?></h1>
-                <p class="lead">Gestiona tu evento de San Valentín</p>
+        <div class="row mb-4 align-items-center">
+            <div class="col-md-8 d-flex align-items-center gap-3">
+                <img src="img/logo2.png" style="width: 80px; height: auto;">
+                <div>
+                    <h1 class="mb-0">Panel de <?php echo $local['nombre']; ?></h1>
+                    <p class="lead mb-0 text-muted">Gestiona tu evento</p>
+                </div>
             </div>
             <div class="col-md-4 text-end">
                 <a href="logout.php" class="btn btn-outline-danger">Cerrar Sesión</a>

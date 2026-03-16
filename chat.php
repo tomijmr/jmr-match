@@ -35,17 +35,22 @@ $otro_usuario = $res->fetch_assoc();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <style>
         /* Fix para móviles: usar dvh si es compatible, fallback a vh */
-        body { background-color: #f8f9fa; height: 100vh; height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
-        .chat-header { background: white; padding: 15px; border-bottom: 1px solid #ddd; display: flex; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); z-index: 10; flex-shrink: 0; }
-        .user-img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; margin-right: 10px; border: 2px solid #ff4b2b; }
-        .chat-container { flex-grow: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 10px; background: #fff5f5; -webkit-overflow-scrolling: touch; }
+        body { background-color: #121212; height: 100vh; height: 100dvh; display: flex; flex-direction: column; overflow: hidden; color: white; }
+        .chat-header { background: #1E1E1E; padding: 15px; border-bottom: 1px solid #333; display: flex; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.5); z-index: 10; flex-shrink: 0; color: white; }
+        .user-img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; margin-right: 10px; border: 2px solid #FF751F; }
+        .chat-container { flex-grow: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 10px; background: #121212; -webkit-overflow-scrolling: touch; }
         .message { max-width: 75%; padding: 10px 15px; border-radius: 20px; position: relative; word-wrap: break-word; font-size: 15px; }
-        .msg-me { background: #ff4b2b; color: white; align-self: flex-end; border-bottom-right-radius: 5px; }
-        .msg-other { background: #e9ecef; color: #333; align-self: flex-start; border-bottom-left-radius: 5px; }
-        .msg-time { display: block; font-size: 10px; margin-top: 5px; opacity: 0.7; text-align: right; }
-        .chat-input-area { background: white; padding: 15px; border-top: 1px solid #ddd; display: flex; align-items: center; gap: 10px; flex-shrink: 0; padding-bottom: env(safe-area-inset-bottom); }
-        .btn-send { background: #ff4b2b; color: white; border: none; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; transition: 0.2s; flex-shrink: 0; }
-        .btn-send:hover { background: #e04022; }
+        .msg-me { background: #FF751F; color: white; align-self: flex-end; border-bottom-right-radius: 5px; }
+        .msg-other { background: #2C2C2C; color: white; align-self: flex-start; border-bottom-left-radius: 5px; }
+        .msg-time { display: block; font-size: 10px; margin-top: 5px; opacity: 0.7; text-align: right; color: #ccc; }
+        .chat-input-area { background: #1E1E1E; padding: 15px; border-top: 1px solid #333; display: flex; align-items: center; gap: 10px; flex-shrink: 0; padding-bottom: env(safe-area-inset-bottom); }
+        .form-control { background-color: #2C2C2C; border: 1px solid #444; color: white; }
+        .form-control:focus { background-color: #2C2C2C; color: white; border-color: #FF751F; box-shadow: none; }
+        .btn-send { background: #FF751F; color: white; border: none; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; transition: 0.2s; flex-shrink: 0; }
+        .btn-send:hover { background: #e06010; }
+        .bi-arrow-left { color: #ccc; }
+        h5 { color: white !important; }
+        .text-muted { color: #888 !important; }
     </style>
 </head>
 <body>

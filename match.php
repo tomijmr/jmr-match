@@ -30,9 +30,15 @@ $p = $res->fetch_assoc();
     <title>¡Es un Match! ❤️</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { background: #ff416c; height: 100vh; display: flex; align-items: center; color: white; text-align: center; justify-content: center; }
-        .match-card { background: rgba(255, 255, 255, 0.2); padding: 2rem; border-radius: 20px; backdrop-filter: blur(10px); }
-        .match-img { width: 150px; height: 150px; border-radius: 50%; border: 5px solid white; object-fit: cover; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        body { background: #121212; height: 100vh; display: flex; align-items: center; color: white; text-align: center; justify-content: center; }
+        .match-card { background: rgba(30, 30, 30, 0.8); padding: 2rem; border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid #333; }
+        .match-img { width: 150px; height: 150px; border-radius: 50%; border: 5px solid #FF751F; object-fit: cover; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .text-danger { color: #FF751F !important; }
+        .btn-light { background-color: white; color: #FF751F !important; border: none; }
+        .btn-outline-light { border-color: white; color: white; }
+        .btn-outline-light:hover { background-color: white; color: #121212; }
+        /* Override bootstrap display-3 color just in case */
+        h1 { color: #FF751F; }
     </style>
 </head>
 <body>
