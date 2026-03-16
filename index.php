@@ -126,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     <div class="mb-3">
                         <label class="form-label">Tu Edad:</label>
-                        <input type="text" name="edad" class="form-control" placeholder="Ej: 25, 24 y 25" min="18" required>
+                        <input type="text" name="edad" class="form-control" placeholder="Ej: 18, 22, 25 o 24 y 25" min="18" required>
                     </div>
 
                     <div class="mb-3">
