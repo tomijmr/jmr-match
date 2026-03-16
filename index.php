@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         .btn-danger { background-color: #FF751F; border-color: #FF751F; color: white; font-weight: bold; }
         .btn-danger:hover { background-color: #e06010; border-color: #e06010; }
         h1, h2, label { color: #FF751F; }
-        .text-muted { color: #aaa !important; }
+        .text-muted { color: #ffffff !important; }
     </style>
 </head>
 <body>
@@ -76,12 +76,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     
                     <div class="mb-3">
                         <label class="form-label">Tu Nombre:</label>
-                        <input type="text" name="nombre" class="form-control" placeholder="Ej: Sofía" required>
+                        <input type="text" name="nombre" class="form-control" placeholder="Ej: Sofia, Tomás o Tomás y Sofia" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Tu Edad:</label>
-                        <input type="number" name="edad" class="form-control" placeholder="Ej: 25" min="18" required>
+                        <input type="text" name="edad" class="form-control" placeholder="Ej: 25, 24 y 25" min="18" required>
                     </div>
 
                     <div class="mb-3">
